@@ -1,5 +1,5 @@
 ---
-- hosts: build_host
+- hosts: servers
   gather_facts: no
   tasks:
     - name: create build directory
