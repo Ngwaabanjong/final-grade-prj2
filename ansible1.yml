@@ -1,7 +1,9 @@
 ---
 - hosts: servers
-  become: true
+  become: yes
+  become_method: sudo
   become_user: ansible
+  become_flags: 'su -c'
   gather_facts: no
   tasks:
     - name: create build directory
