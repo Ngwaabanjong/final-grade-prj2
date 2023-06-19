@@ -10,8 +10,8 @@
       file:
         path: /ansible/demo-xyz
         state: directory
-        owner: root
-        group: root
+        owner: ansible
+        group: ansible
         mode: '0744'
     - name: copy Dockerfile
       copy:
