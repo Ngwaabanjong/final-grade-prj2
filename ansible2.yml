@@ -1,17 +1,17 @@
 - hosts: servers
+  become: true
+  become_method: sudo
+  become_user: ansible
+  become_flags: 'su -c'
   gather_facts: no
   tasks:
-  - name: create detination file
-    file:
-      path: /home/ansible/
-      state: directory
-      owner: ansible
-      mode: '0777'
   - name: copy manifest files to kube-master
     copy:
       src: ./deployment.yml
-      dest: /home/ansible/
+      dest: /ansible/
 
+  - name: Delete the previous of kubernetes objects
+    shell: kubectl apply -f /ansible/deployment.yml
 
   - name: Deploy manifest on Kubernetes
-    shell: kubectl apply -k /home/ansible/deployment.yml
+    shell: kubectl apply -f /ansible/deployment.yml
