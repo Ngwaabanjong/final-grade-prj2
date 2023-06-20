@@ -1,13 +1,14 @@
 ---
 - hosts: servers
   become: true
-  # become_method: sudo
-  # become_user: root
-  # become_ask_pass: false
   gather_facts: no
-  vars_files:
-  - vars.yml  
   tasks:
+    - name: include vault
+      ansible.builtin.debug:
+        file: mypassword.yml
+    - name: print variable
+      ansible.builtin.debug:
+        var: mypassword
     - name: create build directory
       file:
         path: /ansible/demo-xyz

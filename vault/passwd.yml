@@ -1,0 +1,33 @@
+# ISSUE
+# This is plain password, we want to use variable & encrypt it.
+  vars: 
+    mypassword: superpass
+  tasks:
+    - name: print variable
+      ansible.builtin.debug:
+        var: mypassword
+
+# SOLUTION
+# Using vault now
+- hosts: servers
+  become: true
+  vars: 
+    mypassword: superpass
+  tasks:
+    - name: include vault
+      ansible.builtin.debug:
+        file: mypassword.yml
+    - name: print variable
+      ansible.builtin.debug:
+        var: mypassword
+
+# create a variable file mypassword.yml
+mypassword: superpass
+
+# encrypting password
+$ ansible-vault encrypt mypassword.yml
+insert password twice
+$ cat mypassword.yml
+
+#command to run the playbook
+ansible-playbook -i inventory --ask-vault-password playbook.yml

@@ -1,10 +1,13 @@
 - hosts: servers
   become: true
-  # become_method: sudo
-  # become_user: root
-  # become_ask_pass: false
   gather_facts: no
   tasks:
+  - name: include vault
+    ansible.builtin.debug:
+      file: mypassword.yml
+  - name: print variable
+    ansible.builtin.debug:
+      var: mypassword
   - name: copy manifest files to kube-master
     copy:
       src: ./deployment.yml
