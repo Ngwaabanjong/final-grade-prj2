@@ -1,28 +1,28 @@
 ---
 - hosts: servers
   become: yes
-  become_user: ansible
+  become_user: ubuntu
   become_method: su
   gather_facts: no
   tasks:
     - name: create build directory
       file:
-        path: /ansible/demo-xyz
+        path: /ubuntu/demo-xyz
         state: directory
-        owner: ansible
-        group: ansible
+        owner: ubuntu
+        group: ubuntu
         mode: '0744'
     - name: copy Dockerfile
       copy:
         src: ./Dockerfile
-        dest: /ansible/demo-xyz/Dockerfile
-        owner: ansible
-        group: ansible
+        dest: /ubuntu/demo-xyz/Dockerfile
+        owner: ubuntu
+        group: ubuntu
         mode: '0744'
     - name: build container image
       docker_image:
         name: ngwaabanjong/xyz-app
         build:
-          path: /ansible/demo-xyz
+          path: /ubuntu/demo-xyz
           source: build
         state: present

@@ -1,16 +1,16 @@
 - hosts: servers
   become: yes
-  become_user: ansible
+  become_user: ubuntu
   become_method: su
   gather_facts: no
   tasks:
   - name: copy manifest files to kube-master
     copy:
       src: ./deployment.yml
-      dest: /ansible/
+      dest: /ubuntu/
 
   - name: Delete the previous of kubernetes objects
-    shell: kubectl apply -f /ansible/deployment.yml
+    shell: kubectl apply -f /ubuntu/deployment.yml
 
   - name: Deploy manifest on Kubernetes
-    shell: kubectl apply -f /ansible/deployment.yml
+    shell: kubectl apply -f /ubuntu/deployment.yml
