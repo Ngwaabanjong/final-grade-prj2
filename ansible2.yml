@@ -1,8 +1,7 @@
 - hosts: servers
-  become: true
-  become_method: sudo
+  become: yes
   become_user: ansible
-  become_flags: 'su -c'
+  become_method: su
   gather_facts: no
   tasks:
   - name: copy manifest files to kube-master
