@@ -1,6 +1,7 @@
 ---
 - hosts: servers
   become: true
+  become_ask_pass: false
   gather_facts: no
   tasks:
     - name: create build directory
