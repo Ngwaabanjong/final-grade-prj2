@@ -25,7 +25,7 @@ pipeline {
     stage('Build Docker image with Ansible') {
       steps {
         script {  
-          sh "ansible-playbook ansible1.yml"
+          sh "ansible-playbook -i inventory --ask-vault-password ansible1.yml"
         }
       }
     }
@@ -43,7 +43,7 @@ pipeline {
     stage('Deploy to Kubernetes with Ansible') {
       steps {
         script {  
-          sh "ansible-playbook ansible2.yml"
+          sh "ansible-playbook -i inventory --ask-vault-password ansible2.yml"
         }
       }
     }
