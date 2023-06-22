@@ -1,32 +1,14 @@
 ---
 - hosts: servers
   become: true
-  gather_facts: no
   tasks:
-    - name: include vault
-      ansible.builtin.debug:
-        file: mypassword.yml
-    - name: print variable
-      ansible.builtin.debug:
-        var: mypassword
-    - name: create build directory
-      file:
-        path: /ansible/demo-xyz
-        state: directory
-        owner: ansible
-        group: ansible
-        mode: '0744'
-    - name: copy Dockerfile
-      copy:
-        src: ./Dockerfile
-        dest: /ansible/demo-xyz/Dockerfile
-        owner: ansible
-        group: ansible
-        mode: '0744'
-    - name: build container image
-      docker_image:
-        name: ngwaabanjong/xyz-app
-        build:
-          path: /ansible/demo-xyz
-          source: build
-        state: present
+  - name: start the container
+    docker_container:
+      name: xyz-app
+      image: ngwaabanjong/xyz-app
+      state: started
+      published_ports:
+        - 0.0.0.0:8080:8080
+
+
+# make sure pip is installed on server (docker-py) too
