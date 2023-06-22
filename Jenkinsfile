@@ -40,10 +40,18 @@ pipeline {
       }
     }
 
-    stage('Deploy with Ansible') {
+    stage('Deploy docker with Ansible') {
       steps {
         script {  
           ansiblePlaybook credentialsId: 'ec2-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'servers.env', playbook: 'ansible1.yml'
+        }
+      }
+    }
+
+    stage('Deploy K8s with Ansible') {
+      steps {
+        script {  
+          ansiblePlaybook credentialsId: 'ec2-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'servers.env', playbook: 'ansible2.yml'
         }
       }
     }
