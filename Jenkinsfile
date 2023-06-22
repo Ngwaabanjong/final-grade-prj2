@@ -42,7 +42,7 @@ pipeline {
 
     stage('Deploy war file to tomcat server') {
       steps{
-        sshagent(['worker1']) {
+        sshagent(['ec2-key']) {
           sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/ansible/target/XYZtechnologies-1.0.war ec2-user@10.14.1.42:/opt/tomcat/webapps'
         }
       }
