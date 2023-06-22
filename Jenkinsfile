@@ -25,7 +25,7 @@ pipeline {
     stage('Build Docker image') {
       steps {
         script {  
-          sh 'docker build -t ngwaabanjong/xyz-app'
+          sh 'docker build -t ngwaabanjong/xyz-app .'
         }
       }
     }

@@ -11,4 +11,4 @@
         - 0.0.0.0:8080:8080
 
 
-# make sure pip is installed on server (docker-py) too
+# make sure pip is installed on servers (docker-py) too
